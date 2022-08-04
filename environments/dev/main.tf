@@ -5,7 +5,7 @@ provider "google" {
 
 terraform {
  backend "gcs" {
-   bucket  = "${var.environment}-tf-storage-state"
+   bucket  = "shared-tf-storage-state"
    prefix  = "terraform/state"
  }
 }
