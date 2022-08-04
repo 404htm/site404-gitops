@@ -41,7 +41,7 @@ steps:
   - | 
       if [ -d "environments/$BRANCH_NAME/" ]; then
         cd environments/$BRANCH_NAME
-        terraform plan -var project-id=$PROJECT_ID -var environment=$BRANCH_NAME
+        terraform plan -var project_id=$PROJECT_ID -var environment=$BRANCH_NAME
       else
         for dir in environments/*/
         do 
@@ -67,7 +67,7 @@ steps:
   - | 
       if [ -d "environments/$BRANCH_NAME/" ]; then
         cd environments/$BRANCH_NAME      
-        terraform apply -auto-approve  -var project-id=$PROJECT_ID -var environment=$BRANCH_NAME
+        terraform apply -auto-approve  -var project_id=$PROJECT_ID -var environment=$BRANCH_NAME
       else
         echo "***************************** SKIPPING APPLYING *******************************"
         echo "Branch '$BRANCH_NAME' does not represent an oficial environment."
