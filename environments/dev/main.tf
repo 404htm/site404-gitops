@@ -3,9 +3,10 @@ provider "google" {
   region = "us-east4"
 }
 
+
 terraform {
  backend "gcs" {
-   bucket  = "shared-tf-storage-state"
-   prefix  = "terraform/state"
+   bucket  = "tf-storage-state"
+   prefix  = "env/dev"
  }
 }
