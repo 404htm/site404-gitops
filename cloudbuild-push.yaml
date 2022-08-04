@@ -15,8 +15,8 @@ steps:
   args: 
   - '-c'
   - |
-      export TF_VAR_project_id = $PROJECT_ID
-      export TF_VAR_environment = $BRANCH_NAME
+      export TF_VAR_PROJECT_ID = $PROJECT_ID
+      export TF_VAR_ENVIRONMENT = $BRANCH_NAME
       if [ -d "environments/$BRANCH_NAME/" ]; then
         cd environments/$BRANCH_NAME
         terraform init
