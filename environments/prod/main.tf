@@ -6,7 +6,6 @@ provider "google" {
 
 terraform {
  backend "gcs" {
-   bucket  = "shared-tf-state"
    prefix  = "env/prod"
  }
 }
