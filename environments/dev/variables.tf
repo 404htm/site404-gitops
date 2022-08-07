@@ -4,7 +4,7 @@ variable "project_id" {
 }
 
 variable "environment" {
-  description = "Target project ID"
+  description = "Target environment"
   type = string
   default = "dev"
 }

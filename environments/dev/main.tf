@@ -6,7 +6,6 @@ provider "google" {
 
 terraform {
  backend "gcs" {
-   bucket  = "tf-storage-state"
    prefix  = "env/dev"
  }
 }
