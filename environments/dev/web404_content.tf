@@ -1,7 +1,7 @@
 resource "google_storage_bucket" "web404_content" {
   force_destroy               = false
   location                    = "US"
-  name                        = "${var.project_id}-${var.environment}-web-content"
+  name                        = "${var.project_id}-${var.environment}-web404-content"
   project                     = var.project_id
   storage_class               = "STANDARD"
   uniform_bucket_level_access = false
