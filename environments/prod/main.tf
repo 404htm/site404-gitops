@@ -1,4 +1,11 @@
 provider "google" {
-  project     = "htm-332202"
-  region      = "us-east4"
+  project = var.project_id
+  region = "us-east4"
+}
+
+
+terraform {
+ backend "gcs" {
+   prefix  = "env/prod"
+ }
 }

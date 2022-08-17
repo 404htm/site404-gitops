@@ -1,14 +1,19 @@
 
 steps:
-- id: 'branch name'
-  name: 'alpine'
-  entrypoint: 'sh'  
+- id: 'bootstrap'
+  name: 'gcr.io/cloud-builders/gcloud'
+  entrypoint: 'sh'
   args: 
   - '-c'
   - | 
       echo "***********************"
-      echo "$BRANCH_NAME"
+      echo Bootstrapping Prerequisites
+      echo $_STATE_BUCKET
       echo "***********************"
+
+      gsutil mb -c standard -b on gs://$_STATE_BUCKET
+
+      return 0
 - id: 'tf init'
   name: 'hashicorp/terraform:1.0.0'
   entrypoint: 'sh'
@@ -17,7 +22,7 @@ steps:
   - |
       if [ -d "environments/$BRANCH_NAME/" ]; then
         cd environments/$BRANCH_NAME
-        terraform init
+        terraform init -backend-config="bucket=$_STATE_BUCKET"
       else
         for dir in environments/*/
         do 
@@ -67,10 +72,14 @@ steps:
   - | 
       if [ -d "environments/$BRANCH_NAME/" ]; then
         cd environments/$BRANCH_NAME      
-        terraform apply -auto-approve  -var project_id=$PROJECT_ID -var environment=$BRANCH_NAME
+        terraform apply -auto-approve -var project_id=$PROJECT_ID -var environment=$BRANCH_NAME
       else
         echo "***************************** SKIPPING APPLYING *******************************"
         echo "Branch '$BRANCH_NAME' does not represent an oficial environment."
         echo "*******************************************************************************"
       fi
 # [END tf-apply]      
+substitutions:
+  _STATE_BUCKET: ${PROJECT_ID}_shared-tf-state
+options:
+   dynamic_substitutions: true
