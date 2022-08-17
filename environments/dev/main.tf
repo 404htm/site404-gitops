@@ -3,7 +3,6 @@ provider "google" {
   region  = "us-east4"
 }
 
-
 terraform {
   backend "gcs" {
     prefix = "env/dev"
